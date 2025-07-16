@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Frank Trading Signal Pro</title>
+  <title>King Trading Signal Pro</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,243 +32,271 @@
 
   </style>
 
+    <div class="container">
+      <aside class="sidebar">
+        <div class="logo"><h1 id="logo-text">King Trade Signal</h1></div>
+        <div class="settings">
+          <!-- LANGUAGE SELECTOR -->
+          <div class="input-group language-dropdown">
+            <label id="language-label">Language</label>
+            <div class="lang-select">
+              <button class="lang-selected" onclick="toggleLangDropdown()">
+                <img id="current-flag" src="https://flagcdn.com/w20/gb.png" alt="EN" class="flag-icon">
+                <span id="current-lang-text">English</span>
+              </button>
+              <div class="lang-dropdown-content" id="lang-options" style="display:none">
+                <div class="lang-item" data-lang="en" data-flag="https://flagcdn.com/w20/gb.png">English</div>
+                <div class="lang-item" data-lang="hi" data-flag="https://flagcdn.com/w20/in.png">हिन्दी</div>
+              </div>
+            </div>
+          </div>
 
-</head>
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo"><h1 id="logo-text">Frank Trade Signal</h1></div>
-      <div class="settings">
-        <div class="input-group language-dropdown">
-          <label id="language-label">Language</label>
-          <div class="lang-select" id="custom-language-selector">
-            <button class="lang-selected" onclick="toggleLangDropdown()">
-              <img id="current-flag" src="https://flagcdn.com/w20/gb.png" alt="EN" class="flag-icon">
-              <span id="current-lang-text">English</span>
-            </button>
+          <div class="input-group">
+            <label id="currency-label">Trading Pair</label>
+            <select id="currency-pair"></select>
+          </div>
+          <div class="input-group">
+            <label id="timeframe-label">Timeframe</label>
+            <select id="timeframe"></select>
+          </div>
+          <div class="button-group">
+            <button id="generate-btn" class="button button-green"></button>
           </div>
         </div>
-        <select id="language" onchange="changeLanguage()" style="display:none;">
-          <option value="ru">Русский</option>
-          <option value="en" selected>English</option>
-          <option value="uz">O'zbek</option>
-        </select>
-        <div class="input-group">
-          <label id="currency-label">Trading Pair</label>
-                    <select id="currency-pair">
-                        <option>GBP/USD OTC</option>
-                        <option>USD/CAD OTC</option>
-                        <option>EUR/GBP OTC</option>
-                        <option>EUR/JPY OTC</option>
-                        <option>GBP/JPY OTC</option>
-                        <option>AUD/NZD OTC</option>
-                        <option>USD/RUB OTC</option>
-                        <option>CAD/JPY OTC</option>
-                        <option>CHF/JPY OTC</option>
-                        <option>EUR/CHF OTC</option>
-                        <option>AUD/CAD OTC</option>
-                        <option>AED/CNY OTC</option>
-                        <option>EUR/USD</option>
-                        <option>BTC/USD</option>
-                        <option>XAU/USD</option>
-                        <option>ETH/USD</option>
-                        <option>USD/RUB</option>
-                        <option>USD/JPY</option>
-                        <option>GBP/USD</option>
-                        <option>USD/CHF</option>
-                        <option>AUD/USD</option>
-                        <option>USD/CAD</option>
-                        <option>NZD/USD</option>
-                        <option>EUR/GBP</option>
-                        <option>EUR/JPY</option>
-                        <option>GBP/JPY</option>
-                        <option>AUD/JPY</option>
-                        <option>CHF/JPY</option>
-                        <option>EUR/AUD</option>
-                        <option>EUR/CAD</option>
-                        <option>GBP/AUD</option>
-                        <option>GBP/CAD</option>
-                        <option>AUD/CAD</option>
-                        <option>AUD/CHF</option>
-                        <option>NZD/JPY</option>
-                        <option>NZD/CHF</option>                        
-                    </select>
-        </div>
-        <div class="input-group">
-          <label id="timeframe-label">Timeframe</label>
-                    <select id="timeframe">
-                        <option>5 seconds</option>
-                        <option>15 seconds</option>
-                        <option>1 minute</option>
-                        <option>3 minutes</option>
-                        <option>5 minutes</option>
-                        <option>10 minutes</option>
-                    </select>
-        </div>
-        <div class="button-group">
-          <button id="generate-btn" class="button button-green">Get signal</button>
-        </div>
-      </div>
-    </aside>
+      </aside>
 
-    <main class="main-content">
-      <!-- Секция с результатом сигнала -->
-      <section class="signal-block chart-block">
-        <div class="signal-header">
-          <h2 id="signal-title">Signal</h2>
-          <span id="signal-time"></span>
-        </div>
-        <div id="signal-result" class="signal-result">
-          <div class="signal-placeholder">Click "Get signal"</div>
-        </div>
-      </section>
+      <main class="main-content">
+        <section class="signal-block chart-block">
+          <div class="signal-header">
+            <h2 id="signal-title"></h2>
+            <span id="signal-time"></span>
+          </div>
+          <div id="signal-result" class="signal-result">
+            <div class="signal-placeholder"></div>
+          </div>
+        </section>
 
-      <!-- Секция с графиком -->
-      <section class="chart-block">
-        <div class="chart-header">
-          <h3>Live chart</h3>
-        </div>
-        <div id="chart-container" style="display:none; padding:10px;">
-          <canvas id="area-canvas"></canvas>
-        </div>
-      </section>
-    </main>
-  </div>
+        <section class="chart-block">
+          <div class="chart-header"><h3 id="chart-label"></h3></div>
+          <div id="chart-container" style="display:none; padding:10px;">
+            <canvas id="area-canvas"></canvas>
+          </div>
+        </section>
+      </main>
+    </div>
+  </main>
 
   <script>
-    // stubs для языкового селектора
-    function toggleLangDropdown(){};
-    function changeLanguage(){};
+  const translations = {
+    en: {
+      "Trading Pair": "Trading Pair",
+      "Timeframe": "Timeframe",
+      "Accuracy": "Accuracy",
+      "Get signal": "Get signal",
+      "Click \"Get signal\"": "Click \"Get signal\"",
+      "Live chart": "Live chart",
+      "Signal": "Signal",
+      "Analyzing": "Analyzing",
+      "BUY": "BUY",
+      "SELL": "SELL"
+    },
+    hi: {
+      "Trading Pair": "ट्रेडिंग जोड़ी",
+      "Timeframe": "समयावधि",
+      "Accuracy": "शुद्धता",
+      "Get signal": "सिग्नल प्राप्त करें",
+      "Click \"Get signal\"": "\"सिग्नल प्राप्त करें\" पर क्लिक करें",
+      "Live chart": "लाइव चार्ट",
+      "Signal": "सिग्नल",
+      "Analyzing": "विश्लेषण हो रहा है",
+      "BUY": "खरीदें",
+      "SELL": "बेचें"
+    }
+  };
+  let currentLang = 'en';
 
-    (function(){
-      const btn        = document.getElementById('generate-btn');
-      const resultEl   = document.getElementById('signal-result');
-      const timeEl     = document.getElementById('signal-time');
-      const chartDiv   = document.getElementById('chart-container');
-      const chartHeader = document.querySelector('.chart-header');
-      const canvas     = document.getElementById('area-canvas');
-      const ctx        = canvas.getContext('2d');
-      const H          = 200;  // высота графика
+  function toggleLangDropdown() {
+    const menu = document.getElementById('lang-options');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+  function changeLanguage(lang, flagUrl) {
+    currentLang = lang;
+    document.getElementById('current-flag').src = flagUrl;
+    document.getElementById('current-lang-text').textContent = lang === 'en' ? 'English' : 'हिन्दी';
+    document.getElementById('lang-options').style.display = 'none';
+    renderUI();
+  }
 
-      function updateTime(){
-        const now = new Date();
-        timeEl.textContent = now.toTimeString().slice(0,8);
+  function renderUI() {
+    const pairs = [
+      "GBP/USD OTC","USD/CAD OTC","EUR/GBP OTC","EUR/JPY OTC",
+      /* ... остальные пары ... */ "NZD/CHF"
+    ];
+    const timeframes = ["5 seconds","15 seconds","1 minute","3 minutes","5 minutes","10 minutes"];
+
+    document.getElementById('currency-pair').innerHTML =
+      pairs.map(p => `<option>${p}</option>`).join('');
+    document.querySelector('#currency-label').textContent = translations[currentLang]["Trading Pair"];
+
+    document.getElementById('timeframe').innerHTML =
+      timeframes.map(t => `<option>${t}</option>`).join('');
+    document.querySelector('#timeframe-label').textContent = translations[currentLang]["Timeframe"];
+
+    document.getElementById('generate-btn').textContent = translations[currentLang]["Get signal"];
+    document.querySelector('.signal-placeholder').textContent = translations[currentLang]['Click "Get signal"'];
+    document.getElementById('signal-title').textContent = translations[currentLang]["Signal"];
+    document.getElementById('chart-label').textContent = translations[currentLang]["Live chart"];
+  }
+
+  document.querySelectorAll('.lang-item').forEach(el => {
+    el.addEventListener('click', () => {
+      changeLanguage(el.dataset.lang, el.dataset.flag);
+    });
+  });
+
+  (function(){
+    renderUI();
+    const btn        = document.getElementById('generate-btn');
+    const resultEl   = document.getElementById('signal-result');
+    const timeEl     = document.getElementById('signal-time');
+    const chartDiv   = document.getElementById('chart-container');
+    const chartHeader = document.querySelector('.chart-header');
+    const canvas     = document.getElementById('area-canvas');
+    const ctx        = canvas.getContext('2d');
+    const H          = 200;
+
+    function updateTime(){
+      const now = new Date();
+      const hh = now.getHours().toString().padStart(2,'0');
+      const mm = now.getMinutes().toString().padStart(2,'0');
+      const ss = now.getSeconds().toString().padStart(2,'0');
+      timeEl.textContent = `${hh}:${mm}:${ss}`;
+    }
+    updateTime();
+    setInterval(updateTime,1000);
+
+    function genSeries(n){
+      const arr = [];
+      let val = 100 + Math.random()*10;
+      for(let i=0;i<n;i++){
+        val += (Math.random()-0.5)*2;
+        arr.push(val);
       }
-      updateTime();
-      setInterval(updateTime,1000);
+      return arr;
+    }
 
-      function genSeries(n){
-        const arr = [];
-        let val = 100 + Math.random()*10;
-        for(let i=0;i<n;i++){
-          val += (Math.random()-0.5)*2;
-          arr.push(val);
+    btn.addEventListener('click', function(){
+      // Прокрутка вниз через 0.5 сек
+      setTimeout(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }, 500);
+
+      const points   = 20;
+      const duration = 6000;
+      btn.disabled = true;
+      timeEl.textContent = '';
+
+      resultEl.innerHTML = `
+        <div class="signal-analyzing">
+          ${translations[currentLang]["Analyzing"]}
+          <span class="dots"><span>.</span><span>.</span><span>.</span></span>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+        </div>`;
+      const fill = resultEl.querySelector('.progress-fill');
+      fill.style.transition = `width ${duration}ms linear`;
+      setTimeout(()=> fill.style.width='100%', 50);
+
+      chartHeader.style.display = 'flex';
+      chartDiv.style.display    = 'block';
+      canvas.width  = chartDiv.clientWidth;
+      canvas.height = H;
+
+      const data = genSeries(points);
+      const min  = Math.min(...data), max = Math.max(...data);
+      const W    = canvas.width;
+      const step = W/(points-1);
+
+      let start = null;
+      function drawFrame(ts){
+        if(!start) start = ts;
+        const elapsed = ts - start;
+        const t       = Math.min(elapsed/duration,1);
+        const upto    = t*(points-1);
+        const idx     = Math.floor(upto);
+        const frac    = upto - idx;
+
+        ctx.clearRect(0,0,W,H);
+        ctx.beginPath();
+        for(let i=0;i<=idx;i++){
+          const x = i*step;
+          const y = H - ((data[i]-min)/(max-min))*H;
+          ctx[i===0?'moveTo':'lineTo'](x,y);
         }
-        return arr;
+        if(idx < points-1){
+          const x = (idx+frac)*step;
+          const y = H - ((data[idx+1]-min)/(max-min))*H;
+          ctx.lineTo(x,y);
+        }
+        ctx.strokeStyle = 'var(--accent-green)';
+        ctx.lineWidth   = 2;
+        ctx.stroke();
+
+        ctx.lineTo((idx+frac)*step,H);
+        ctx.lineTo(0,H);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(76,175,80,0.2)';
+        ctx.fill();
+
+        if(t<1) requestAnimationFrame(drawFrame);
       }
+      requestAnimationFrame(drawFrame);
 
-      btn.addEventListener('click', function(){
-        const points   = 20;
-        const duration = 6000;
-        btn.disabled = true;
-        timeEl.textContent = '';
+      setTimeout(()=>{
+        chartDiv.style.display    = 'none';
+        chartHeader.style.display = 'none';
 
-        // показываем прогресс-анализ
+        const action = Math.random()<0.5 ? "BUY" : "SELL";
+        const prob   = (Math.random()*48+52).toFixed(2)+'%';
+        const nowStr = new Date().toLocaleTimeString();
+        const pair   = document.getElementById('currency-pair').value;
+        const tf     = document.getElementById('timeframe').value;
+
         resultEl.innerHTML = `
-          <div class="signal-analyzing">
-            Analyzing<span class="dots"><span>.</span><span>.</span><span>.</span></span>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div class="signal-details">
+            <div class="signal-pair">${pair}</div>
+            <div class="signal-direction ${action==="BUY"?'green':'red'}">
+              ${translations[currentLang][action]}
+            </div>
+            <div class="signal-timeframe">
+              ${translations[currentLang]["Timeframe"]}: ${tf}
+            </div>
+            <div class="signal-probability">
+              ${translations[currentLang]["Accuracy"]}: ${prob}
+            </div>
           </div>`;
-        const fill = resultEl.querySelector('.progress-fill');
-        fill.style.transition = 'width '+duration+'ms linear';
-        setTimeout(()=> fill.style.width='100%', 50);
+        timeEl.textContent = nowStr;
 
-        // показываем заголовок и контейнер графика
-        chartHeader.style.display = 'flex';
-        chartDiv.style.display    = 'block';
-        canvas.width  = chartDiv.clientWidth;
-        canvas.height = H;
-
-        const data = genSeries(points);
-        const min  = Math.min(...data), max = Math.max(...data);
-        const W    = canvas.width;
-        const step = W/(points-1);
-
-        let start = null;
-        function drawFrame(ts){
-          if(!start) start = ts;
-          const elapsed = ts - start;
-          const t       = Math.min(elapsed/duration,1);
-          const upto    = t*(points-1);
-          const idx     = Math.floor(upto);
-          const frac    = upto - idx;
-
-          ctx.clearRect(0,0,W,H);
-          ctx.beginPath();
-          for(let i=0;i<=idx;i++){
-            const x = i*step;
-            const y = H - ((data[i]-min)/(max-min))*H;
-            if(i===0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
+        const num  = parseInt(tf,10)||5;
+        const secs = /minute/.test(tf)?num*60:num;
+        let rem = secs;
+        btn.textContent = `${translations[currentLang]["Get signal"]} (${rem}s)`;
+        const iv = setInterval(()=>{
+          rem--;
+          if(rem<=0){
+            clearInterval(iv);
+            btn.textContent = translations[currentLang]["Get signal"];
+            btn.disabled = false;
+          } else {
+            btn.textContent = `${translations[currentLang]["Get signal"]} (${rem}s)`;
           }
-          if(idx < points-1){
-            const x = (idx+frac)*step;
-            const y = H - ((data[idx+1]-min)/(max-min))*H;
-            ctx.lineTo(x,y);
-          }
-          ctx.strokeStyle = 'var(--accent-green)';
-          ctx.lineWidth   = 2;
-          ctx.stroke();
+        },1000);
+      }, duration);
+    });
+  })();
+</script>
 
-          ctx.lineTo((idx+frac)*step,H);
-          ctx.lineTo(0,H);
-          ctx.closePath();
-          ctx.fillStyle = 'rgba(76,175,80,0.2)';
-          ctx.fill();
+</body>
+</html>
 
-          if(t<1) requestAnimationFrame(drawFrame);
-        }
-        requestAnimationFrame(drawFrame);
-
-        // по окончании
-        setTimeout(()=>{
-          chartDiv.style.display    = 'none';
-          chartHeader.style.display = 'none';
-
-          const action = Math.random()<0.5?'BUY':'SELL';
-          const prob   = (Math.random()*48+52).toFixed(2)+'%';
-          const nowStr = new Date().toLocaleTimeString();
-          const pair   = document.getElementById('currency-pair').value;
-          const tf     = document.getElementById('timeframe').value;
-
-          resultEl.innerHTML = `
-            <div class="signal-details">
-              <div class="signal-pair">${pair}</div>
-              <div class="signal-direction ${action==='BUY'?'green':'red'}">${action}</div>
-              <div class="signal-timeframe">Timeframe: ${tf}</div>
-              <div class="signal-probability">Accuracy: ${prob}</div>
-            </div>`;
-          timeEl.textContent = nowStr;
-
-          // откат кнопки
-          const num  = parseInt(tf,10)||5;
-          const secs = /minute/.test(tf)?num*60:num;
-          let rem = secs;
-          btn.textContent = `Get signal (${rem}s)`;
-          const iv = setInterval(()=>{
-            rem--;
-            if(rem<=0){
-              clearInterval(iv);
-              btn.textContent = 'Get signal';
-              btn.disabled = false;
-            } else {
-              btn.textContent = `Get signal (${rem}s)`;
-            }
-          },1000);
-        }, duration);
-      });
-    })();
-  </script>
-  
 </body>
 </html>
