@@ -1,4 +1,4 @@
-﻿@import url('../css2');
+@import url('../css2');
 
 :root {
     --bg-dark: #E9E9E9;
@@ -24,7 +24,7 @@
 html, body {
     height: 100%;
     font-family: 'Inter', sans-serif;
-    background:url("https://pocketoption.com/themes/cabinet/images/body/dark-blue.jpg?v1");
+    background:url("./dark-blue1.jpg");
 	background-size: cover;
     color: var(--text-primary);
     line-height: 1.6;
