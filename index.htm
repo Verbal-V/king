@@ -393,7 +393,7 @@ input[type="range"]::-moz-range-thumb {
         }
         // Варьируем её в зависимости от риска
         const variation = (Math.random() - 0.5) * (10 - risk) * 0.4;
-        const prob = Math.min(99, Math.max(51, baseProb + variation)).toFixed(2) + '%';
+        const prob = Math.min(99, Math.max(61, baseProb + variation)).toFixed(2) + '%';
 
         const action = Math.random() < 0.5 ? 'BUY' : 'SELL';
         const nowStr = new Date().toLocaleTimeString();
